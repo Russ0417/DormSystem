@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.DormMapper">
+
+    <resultMap type="Dorm" id="DormResult">
+        <result property="id" column="id"/>
+        <result property="dormId" column="dorm_id"/>
+        <result property="dormName" column="dorm_name"/>
+        <result property="dbuilding" column="dbuilding"/>
+        <result property="dtype" column="dtype"/>
+        <result property="dormPay" column="dorm_pay"/>
+        <result property="electricPay" column="electric_pay"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="remark" column="remark"/>
+    </resultMap>
+
+    <sql id="selectDormVo">
+        select id,
+               dorm_id,
+               dorm_name,
+               dbuilding,
+               dtype,
+               dorm_pay,
+               electric_pay,
+               create_by,
+               create_time,
+               update_by,
+               update_time,
+               remark
+        from dorm
+    </sql>
+
+    <select id="selectDormList" parameterType="Dorm" resultMap="DormResult">
+        select id, dorm_id, dorm_name, dbuilding, dtype, dorm_pay, electric_pay, create_by, create_time, update_by,
+        update_time, remark from dorm
+        <where>
+            <if test="dormId != null and dormId != ''">dorm_id = #{dormId}</if>
+            <if test="dormName != null  and dormName != ''">and dorm_name like concat('%', #{dormName}, '%')</if>
+            <if test="dbuilding != null  and dbuilding != ''">and dbuilding = #{dbuilding}</if>
+            <if test="dtype != null and dtype != ''">and dtype = #{dtype}</if>
+        </where>
+    </select>
+
+    <select id="selectDormById" parameterType="String" resultMap="DormResult">
+        <include refid="selectDormVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertDorm" parameterType="Dorm">
+        insert into dorm
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="dormId != null">dorm_id,</if>
+            <if test="dormName != null and dormName != ''">dorm_name,</if>
+            <if test="dbuilding != null and dbuilding != ''">dbuilding,</if>
+            <if test="dtype != null">dtype,</if>
+            <if test="dormPay != null">dorm_pay,</if>
+            <if test="electricPay != null">electric_pay,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="dormId != null">#{dormId},</if>
+            <if test="dormName != null and dormName != ''">#{dormName},</if>
+            <if test="dbuilding != null and dbuilding != ''">#{dbuilding},</if>
+            <if test="dtype != null">#{dtype},</if>
+            <if test="dormPay != null">#{dormPay},</if>
+            <if test="electricPay != null">#{electricPay},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+        </trim>
+    </insert>
+
+    <update id="updateDorm" parameterType="Dorm">
+        update dorm
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="dormId != null">dorm_id = #{dormId},</if>
+            <if test="dormName != null and dormName != ''">dorm_name = #{dormName},</if>
+            <if test="dbuilding != null and dbuilding != ''">dbuilding = #{dbuilding},</if>
+            <if test="dtype != null">dtype = #{dtype},</if>
+            <if test="dormPay != null">dorm_pay = #{dormPay},</if>
+            <if test="electricPay != null">electric_pay = #{electricPay},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteDormById" parameterType="String">
+        delete
+        from dorm
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteDormByIds" parameterType="String">
+        delete from dorm where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

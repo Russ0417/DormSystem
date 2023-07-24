@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--360浏览器优先以webkit内核解析-->
+    <title>介绍</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link href="../static/css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" rel="stylesheet"/>
+    <link href="../static/css/style.min.css" th:href="@{/css/style.min.css}" rel="stylesheet"/>
+</head>
+
+<body class="gray-bg">
+<div class="row border-bottom white-bg dashboard-header">
+
+
+</div>
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>欢迎你</h5>
+                </div>
+                <div class="ibox-content ">
+                   使用本系统
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>宿舍管理</h5>
+                </div>
+                <div class="ibox-content no-padding">
+                    <div class="panel-body">
+                        <div class="panel-group" id="version">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h5 class="panel-title">
+                                        <li>高校宿舍管理系统</li>
+                                        <li>点击左侧菜单，你可以做：</li>
+                                        <li> 1:系统管理：包含系统用户，系统角色，系统日志等</li>
+                                        <li> 2:信息管理：管理宿舍信息，班级信息，学生信息，进行宿舍维修登记</li>
+                                        <li> 3:卫生管理：管理宿舍卫生信息，学生卫生信息</li>
+                                        <li> 4:访客登记：进行访客信息登记</li>
+                                        <!--     <a data-toggle="collapse" data-parent="#version" href="#v476">v4.7.6</a>-->
+                                        <!--     <code class="pull-right">2022.12.16</code>-->
+                                    </h5>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--            <div class="col-sm-4">-->
+            <!--                <div class="ibox float-e-margins">-->
+            <!--                    <div class="ibox-title">-->
+            <!--                        <h5>喜欢</h5>-->
+            <!--                    </div>-->
+            <!--                    <div class="ibox-content">-->
+            <!--                        <div class="alert alert-warning">-->
+            <!--                            这是一个标题-->
+            <!--                        </div>-->
+            <!--                        <p id="pay-qrcode">-->
+            <!--                            这是一段文字！-->
+            <!--                        </p>-->
+
+            <!--                    </div>-->
+            <!--                </div>-->
+            <!--            </div>-->
+        </div>
+    </div>
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/ajax/libs/layer/layer.min.js}"></script>
+    <script type="text/javascript">
+        $('#pay-qrcode').click(function () {
+            var html = $(this).html();
+            parent.layer.open({
+                title: false,
+                type: 1,
+                closeBtn: false,
+                shadeClose: true,
+                area: ['600px', '360px'],
+                content: html
+            });
+        });
+    </script>
+</body>
+</html>

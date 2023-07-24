@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.DvisitorMapper">
+
+    <resultMap type="Dvisitor" id="DvisitorResult">
+        <result property="id" column="id"/>
+        <result property="visitorName" column="visitor_name"/>
+        <result property="visitorPosition" column="visitor_position"/>
+        <result property="visitorBuilding" column="visitor_building"/>
+        <result property="enterTime" column="enter_time"/>
+        <result property="leaveTime" column="leave_time"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="remark" column="remark"/>
+    </resultMap>
+
+    <sql id="selectDvisitorVo">
+        select id,
+               visitor_name,
+               visitor_position,
+               visitor_building,
+               enter_time,
+               leave_time,
+               create_by,
+               create_time,
+               update_by,
+               update_time,
+               remark
+        from dvisitor
+    </sql>
+
+    <select id="selectDvisitorList" parameterType="Dvisitor" resultMap="DvisitorResult">
+        <include refid="selectDvisitorVo"/>
+        <where>
+            <if test="visitorName != null  and visitorName != ''">and visitor_name like concat('%', #{visitorName},
+                '%')
+            </if>
+            <if test="visitorPosition != null  and visitorPosition != ''">and visitor_position = #{visitorPosition}</if>
+            <if test="visitorBuilding != null  and visitorBuilding != ''">and visitor_building = #{visitorBuilding}</if>
+            <if test="enterTime != null ">and enter_time = #{enterTime}</if>
+            <if test="leaveTime != null ">and leave_time = #{leaveTime}</if>
+        </where>
+    </select>
+
+    <select id="selectDvisitorById" parameterType="String" resultMap="DvisitorResult">
+        <include refid="selectDvisitorVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertDvisitor" parameterType="Dvisitor">
+        insert into dvisitor
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="visitorName != null and visitorName != ''">visitor_name,</if>
+            <if test="visitorPosition != null and visitorPosition != ''">visitor_position,</if>
+            <if test="visitorBuilding != null and visitorBuilding != ''">visitor_building,</if>
+            <if test="enterTime != null">enter_time,</if>
+            <if test="leaveTime != null">leave_time,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="visitorName != null and visitorName != ''">#{visitorName},</if>
+            <if test="visitorPosition != null and visitorPosition != ''">#{visitorPosition},</if>
+            <if test="visitorBuilding != null and visitorBuilding != ''">#{visitorBuilding},</if>
+            <if test="enterTime != null">#{enterTime},</if>
+            <if test="leaveTime != null">#{leaveTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+        </trim>
+    </insert>
+
+    <update id="updateDvisitor" parameterType="Dvisitor">
+        update dvisitor
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="visitorName != null and visitorName != ''">visitor_name = #{visitorName},</if>
+            <if test="visitorPosition != null and visitorPosition != ''">visitor_position = #{visitorPosition},</if>
+            <if test="visitorBuilding != null and visitorBuilding != ''">visitor_building = #{visitorBuilding},</if>
+            <if test="enterTime != null">enter_time = #{enterTime},</if>
+            <if test="leaveTime != null">leave_time = #{leaveTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteDvisitorById" parameterType="String">
+        delete
+        from dvisitor
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteDvisitorByIds" parameterType="String">
+        delete from dvisitor where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

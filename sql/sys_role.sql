@@ -1,0 +1,2 @@
+INSERT INTO `sys_role` (`role_id`, `role_name`, `role_key`, `role_sort`, `data_scope`, `status`, `del_flag`, `create_by`, `create_time`, `update_by`, `update_time`, `remark`) VALUES (1, '超级管理员', 'admin', 1, '1', '0', '0', 'admin', '2023-04-04 10:20:46', '', NULL, '超级管理员');
+INSERT INTO `sys_role` (`role_id`, `role_name`, `role_key`, `role_sort`, `data_scope`, `status`, `del_flag`, `create_by`, `create_time`, `update_by`, `update_time`, `remark`) VALUES (2, '学生', 'common', 2, '2', '0', '0', 'admin', '2023-04-04 10:20:46', 'admin', '2023-05-09 21:25:38', '普通角色');

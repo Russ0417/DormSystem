@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.DormgradeMapper">
+    
+    <resultMap type="Dormgrade" id="DormgradeResult">
+        <result property="id"    column="id"    />
+        <result property="dormId"    column="dorm_id"    />
+        <result property="dormBuilding"    column="dorm_building"    />
+        <result property="dormGrade"    column="dorm_grade"    />
+        <result property="reporter"    column="reporter"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectDormgradeVo">
+        select id, dorm_id, dorm_building, dorm_grade, reporter, create_by, create_time, update_by, update_time, remark from dormgrade
+    </sql>
+
+    <select id="selectDormgradeList" parameterType="Dormgrade" resultMap="DormgradeResult">
+        <include refid="selectDormgradeVo"/>
+        <where>  
+            <if test="dormId != null  and dormId != ''"> and dorm_id = #{dormId}</if>
+            <if test="dormBuilding != null  and dormBuilding != ''"> and dorm_building = #{dormBuilding}</if>
+            <if test="dormGrade != null  and dormGrade != ''"> and dorm_grade = #{dormGrade}</if>
+        </where>
+    </select>
+    
+    <select id="selectDormgradeById" parameterType="String" resultMap="DormgradeResult">
+        <include refid="selectDormgradeVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertDormgrade" parameterType="Dormgrade">
+        insert into dormgrade
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="dormId != null and dormId != ''">dorm_id,</if>
+            <if test="dormBuilding != null and dormBuilding != ''">dorm_building,</if>
+            <if test="dormGrade != null and dormGrade != ''">dorm_grade,</if>
+            <if test="reporter != null">reporter,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="dormId != null and dormId != ''">#{dormId},</if>
+            <if test="dormBuilding != null and dormBuilding != ''">#{dormBuilding},</if>
+            <if test="dormGrade != null and dormGrade != ''">#{dormGrade},</if>
+            <if test="reporter != null">#{reporter},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDormgrade" parameterType="Dormgrade">
+        update dormgrade
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="dormId != null and dormId != ''">dorm_id = #{dormId},</if>
+            <if test="dormBuilding != null and dormBuilding != ''">dorm_building = #{dormBuilding},</if>
+            <if test="dormGrade != null and dormGrade != ''">dorm_grade = #{dormGrade},</if>
+            <if test="reporter != null">reporter = #{reporter},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteDormgradeById" parameterType="String">
+        delete from dormgrade where id = #{id}
+    </delete>
+
+    <delete id="deleteDormgradeByIds" parameterType="String">
+        delete from dormgrade where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

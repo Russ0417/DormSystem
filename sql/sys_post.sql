@@ -1,0 +1,2 @@
+INSERT INTO `sys_post` (`post_id`, `post_code`, `post_name`, `post_sort`, `status`, `create_by`, `create_time`, `update_by`, `update_time`, `remark`) VALUES (1, 'ceo', '总管', 1, '0', 'admin', '2023-04-04 10:20:46', 'admin', '2023-04-26 14:00:40', '');
+INSERT INTO `sys_post` (`post_id`, `post_code`, `post_name`, `post_sort`, `status`, `create_by`, `create_time`, `update_by`, `update_time`, `remark`) VALUES (4, 'user', '学生用户', 4, '0', 'admin', '2023-04-04 10:20:46', 'admin', '2023-04-26 14:01:01', '');

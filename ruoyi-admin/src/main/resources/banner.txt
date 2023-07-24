@@ -1,0 +1,19 @@
+Application Version: ${ruoyi.version}
+Spring Boot Version: ${spring-boot.version}
+${AnsiColor.BRIGHT_WHITE}
+                 _nnnn_
+                dGGGGMMb
+               @p~qp~~qMb  -----BUG？
+               M|@||@) M|
+               @,----.JM|
+              JS^\__/  qKL
+             dZP        qKRb
+            dZP          qKKb
+           fZP            SMMb
+           HZM            MMMM
+           FqM            MMMM
+         __| ".        |\dS"qML
+         |    `.       | `' \Zq
+        _)      \.___.,|     .'
+        \____   )MMMMMP|   .'
+             `-'       `--'
