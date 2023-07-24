@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.DrepairMapper">
+
+    <resultMap type="Drepair" id="DrepairResult">
+        <result property="id" column="id"/>
+        <result property="repairBuild" column="repair_build"/>
+        <result property="repairDorm" column="repair_dorm"/>
+        <result property="reporter" column="reporter"/>
+        <result property="repairThing" column="repair_thing"/>
+        <result property="repairPay" column="repair_pay"/>
+        <result property="repairReason" column="repair_reason"/>
+        <result property="repairPerson" column="repair_person"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="remark" column="remark"/>
+    </resultMap>
+
+    <sql id="selectDrepairVo">
+        select id,
+               repair_build,
+               repair_dorm,
+               reporter,
+               repair_thing,
+               repair_pay,
+               repair_reason,
+               repair_person,
+               create_by,
+               create_time,
+               update_by,
+               update_time,
+               remark
+        from drepair
+    </sql>
+
+    <select id="selectDrepairList" parameterType="Drepair" resultMap="DrepairResult">
+        <include refid="selectDrepairVo"/>
+        <where>
+            <if test="repairBuild != null  and repairBuild != ''">and repair_build = #{repairBuild}</if>
+            <if test="repairDorm != null  and repairDorm != ''">and repair_dorm = #{repairDorm}</if>
+            <if test="reporter != null  and reporter != ''">and reporter like concat('%', #{reporter}, '%')</if>
+        </where>
+    </select>
+
+    <select id="selectDrepairById" parameterType="String" resultMap="DrepairResult">
+        <include refid="selectDrepairVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertDrepair" parameterType="Drepair">
+        insert into drepair
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="repairBuild != null and repairBuild != ''">repair_build,</if>
+            <if test="repairDorm != null and repairDorm != ''">repair_dorm,</if>
+            <if test="reporter != null and reporter != ''">reporter,</if>
+            <if test="repairThing != null and repairThing != ''">repair_thing,</if>
+            <if test="repairPay != null and repairPay != ''">repair_pay,</if>
+            <if test="repairReason != null and repairReason != ''">repair_reason,</if>
+            <if test="repairPerson != null">repair_person,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="repairBuild != null and repairBuild != ''">#{repairBuild},</if>
+            <if test="repairDorm != null and repairDorm != ''">#{repairDorm},</if>
+            <if test="reporter != null and reporter != ''">#{reporter},</if>
+            <if test="repairThing != null and repairThing != ''">#{repairThing},</if>
+            <if test="repairPay != null and repairPay != ''">#{repairPay},</if>
+            <if test="repairReason != null and repairReason != ''">#{repairReason},</if>
+            <if test="repairPerson != null">#{repairPerson},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+        </trim>
+    </insert>
+
+    <update id="updateDrepair" parameterType="Drepair">
+        update drepair
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="repairBuild != null and repairBuild != ''">repair_build = #{repairBuild},</if>
+            <if test="repairDorm != null and repairDorm != ''">repair_dorm = #{repairDorm},</if>
+            <if test="reporter != null and reporter != ''">reporter = #{reporter},</if>
+            <if test="repairThing != null and repairThing != ''">repair_thing = #{repairThing},</if>
+            <if test="repairPay != null and repairPay != ''">repair_pay = #{repairPay},</if>
+            <if test="repairReason != null and repairReason != ''">repair_reason = #{repairReason},</if>
+            <if test="repairPerson != null">repair_person = #{repairPerson},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteDrepairById" parameterType="String">
+        delete
+        from drepair
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteDrepairByIds" parameterType="String">
+        delete from drepair where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>
