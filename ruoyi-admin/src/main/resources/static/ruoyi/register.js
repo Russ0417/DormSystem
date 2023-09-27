@@ -1,15 +1,14 @@
-
-$(function() {
+$(function () {
     validateRule();
-    $('.imgcode').click(function() {
+    $('.imgcode').click(function () {
         var url = ctx + "captcha/captchaImage?type=" + captchaType + "&s=" + Math.random();
         $(".imgcode").attr("src", url);
     });
 });
 
 $.validator.setDefaults({
-    submitHandler: function() {
-    	register();
+    submitHandler: function () {
+        register();
     }
 });
 
@@ -26,22 +25,22 @@ function register() {
             "password": password,
             "validateCode": validateCode
         },
-        success: function(r) {
+        success: function (r) {
             if (r.code == web_status.SUCCESS) {
-            	layer.alert("<font color='red'>恭喜你，您的账号 " + username + " 注册成功！</font>", {
-            	    icon: 1,
-            	    title: "系统提示"
-            	},
-            	function(index) {
-            	    //关闭弹窗
-            	    layer.close(index);
-            	    location.href = ctx + 'login';
-            	});
+                layer.alert("<font color='red'>恭喜你，您的账号 " + username + " 注册成功！</font>", {
+                        icon: 1,
+                        title: "系统提示"
+                    },
+                    function (index) {
+                        //关闭弹窗
+                        layer.close(index);
+                        location.href = ctx + 'login';
+                    });
             } else {
-            	$.modal.closeLoading();
-            	$('.imgcode').click();
-            	$(".code").val("");
-            	$.modal.msg(r.msg);
+                $.modal.closeLoading();
+                $('.imgcode').click();
+                $(".code").val("");
+                $.modal.msg(r.msg);
             }
         }
     });
@@ -70,7 +69,7 @@ function validateRule() {
                 minlength: icon + "用户名不能小于2个字符"
             },
             password: {
-            	required: icon + "请输入您的密码",
+                required: icon + "请输入您的密码",
                 minlength: icon + "密码不能小于5个字符",
             },
             confirmPassword: {
